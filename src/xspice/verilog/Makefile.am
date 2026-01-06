@@ -36,12 +36,24 @@ ivlngvpi_la_LDFLAGS = -module -shared  -avoid-version
 # for building.
 
 if DLIBS_FULLY_RESOLVED
+ivlng_la_LDFLAGS += -no-undefined
+ivlngvpi_la_LDFLAGS += -no-undefined
+endif
+
+if WITH_LIBVVP
+ivlngvpi_la_SOURCES += icarus_shim.c
+ivlngvpi_la_CPPFLAGS = $(LIBVVP_CFLAGS)
+ivlngvpi_la_LIBADD  = $(LIBVVP_LIBS)
+clean-local:
+	rm -rf .libs/libvvp.* libvvp.la
+else
 pkglib_LTLIBRARIES += libvvp.la
 libvvp_la_SOURCES = vpi_dummy.c vpi_user_dummy.h coroutine.h coroutine_cosim.h
 libvvp_la_LDFLAGS = -no-undefined -module -shared -avoid-version
-ivlng_la_LDFLAGS += -no-undefined
 ivlngvpi_la_LIBADD = libvvp.la ivlng.la
-ivlngvpi_la_LDFLAGS += -no-undefined
+if DLIBS_FULLY_RESOLVED
+libvvp_la_LDFLAGS += -no-undefined
+endif
 endif
 
 # Libtool installs unwanted libraries, remove them after installation.
