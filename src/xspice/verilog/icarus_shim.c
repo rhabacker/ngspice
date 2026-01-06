@@ -291,11 +291,16 @@ void Cosim_setup(struct co_info *pinfo)
         file = (char *)pinfo->lib_argv[0];
     else //libvvp is assumed to be in the OS search path.
         file = "libvvp";
+#ifdef HAVE_LIBVVP
+    /* using external libvvp linked at build time: skip loading shared library */
+    context->vvp_handle = NULL;
+#else
     context->vvp_handle = pinfo->dlopen_fn(file);
     if (!context->vvp_handle) {
         fprintf(stderr, "Icarus shim failed to load VVP library\n");
         abort();
     }
+#endif
 
     /* Set-up the execution stack for libvvp and start it. */
 

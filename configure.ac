@@ -285,6 +285,10 @@ AC_ARG_ENABLE([ndev],
 AC_ARG_ENABLE([cmathtests],
     [AS_HELP_STRING([--enable-cmathtests], [Enable ancient tests in src/math/cmaths])])
 
+# --with-libvvp: Use external vvp library from iverilog instead of dummy library in src/xspice/verilog
+AC_ARG_WITH([libvvp],
+    [AS_HELP_STRING([--with-libvvp[=yes/no]], [use libvvp for verilog instead of embedded dummy library. Default=no.])])
+
 # --enable-help: try to force --ansi option to the compiler
 AC_ARG_ENABLE([help],
     [AS_HELP_STRING([--enable-help], [Force building nghelp (deprecated)])])
@@ -1164,6 +1168,39 @@ AC_SUBST([XSPICEINIT])
 AC_SUBST([XSPICEDLLIBS])
 
 AM_CONDITIONAL([XSPICE_WANTED], [test "x$enable_xspice" = xyes || test "x$enable_xspice" = x])
+
+have_libvvp=no
+LIBVVP_CFLAGS=""
+LIBVVP_LIBS=""
+if test "x$with_libvvp" = "xyes"; then
+    # 1) Try pkg-config first
+    if test "x$PKG_CONFIG" != "x"; then
+    PKG_CHECK_MODULES([LIBVVP], [libvvp],
+        [have_libvvp=yes],
+        [have_libvvp=no])
+    fi
+    # 2) Fallback to manual checks if pkg-config failed
+    if test "x$have_libvvp" != "xyes"; then
+    AC_CHECK_HEADER([iverilog/libvvp.h],
+        [AC_CHECK_LIB([vvp], [vvp_init],
+        [have_libvvp=yes
+            LIBVVP_LIBS="-lvvp"],
+        [have_libvvp=no])],
+        [have_libvvp=no])
+    fi
+    if test "x$have_libvvp" != "xyes"; then
+        AC_MSG_FAILURE([--with-libvvp was given, but external libvvp was not found])
+    fi
+    if test "x$enable_xspice" != "xyes" && test "x$enable_xspice" != "x"; then
+        AC_MSG_FAILURE([--with-libvvp was given, but xspice is not enabled, use --enable-xspice])
+    fi
+else
+    AC_MSG_RESULT([Building with external libvvp disabled])
+fi
+AC_SUBST([LIBVVP_CFLAGS])
+AC_SUBST([LIBVVP_LIBS])
+AM_CONDITIONAL([WITH_LIBVVP], [test "x$have_libvvp" = "xyes"])
+
 
 AM_CONDITIONAL([SHORT_CHECK_WANTED], [test "x$enable_shortcheck" = xyes])
 
