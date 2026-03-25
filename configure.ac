@@ -1460,6 +1460,13 @@ AC_CONFIG_FILES([Makefile
                  src/xspice/idn/Makefile
                  src/xspice/verilog/Makefile
                  src/xspice/vhdl/Makefile
+                 src/xspice/examples/Makefile
+                 src/xspice/examples/d_to_real/Makefile
+                 src/xspice/examples/nco/Makefile
+                 src/xspice/examples/print_param_types/Makefile
+                 src/xspice/examples/real_delay/Makefile
+                 src/xspice/examples/real_gain/Makefile
+                 src/xspice/examples/real_to_v/Makefile
                  src/osdi/Makefile
                  tests/Makefile
                  tests/bsim1/Makefile

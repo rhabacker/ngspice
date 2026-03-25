@@ -1,0 +1,6 @@
+* Smoke test for real_delay code model
+.control
+codemodel ./real_delay.cm
+quit
+.endc
+.end

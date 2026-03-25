@@ -1,0 +1,6 @@
+* Smoke test for real_gain code model
+.control
+codemodel ./real_gain.cm
+quit
+.endc
+.end

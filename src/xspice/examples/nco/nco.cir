@@ -1,0 +1,6 @@
+* Smoke test for nco code model
+.control
+codemodel ./nco.cm
+quit
+.endc
+.end

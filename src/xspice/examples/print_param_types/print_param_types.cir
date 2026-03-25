@@ -1,0 +1,6 @@
+* Smoke test for print_param_types code model
+.control
+codemodel ./print_param_types.cm
+quit
+.endc
+.end

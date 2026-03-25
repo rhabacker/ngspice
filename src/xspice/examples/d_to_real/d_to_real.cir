@@ -1,0 +1,6 @@
+* Smoke test for d_to_real code model
+.control
+codemodel ./d_to_real.cm
+quit
+.endc
+.end
