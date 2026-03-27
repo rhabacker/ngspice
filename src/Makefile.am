@@ -122,7 +122,7 @@ if WINGUI
 ngspice_LDFLAGS = -municode $(AM_LDFLAGS)
 ngspice_SOURCES += winmain.c hist_info.c
 else
-ngspice_LDFLAGS = 
+ngspice_LDFLAGS = -lm
 endif
 
 ngspice_LDADD = \
