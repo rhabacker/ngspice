@@ -43,6 +43,10 @@
 
 #include "ngspice/missing_math.h"
 
+#ifndef UNUSED
+#define UNUSED(x) (void)(x)
+#endif
+
 #ifdef STDC_HEADERS
 #  include <stdlib.h>
 #  include <string.h>

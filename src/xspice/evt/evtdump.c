@@ -127,9 +127,9 @@ void EVTdump(
         return;
     }
 #else
-    (void)*ckt;
-    (void)mode;
-    (void)step;
+    UNUSED(ckt);
+    UNUSED(mode);
+    UNUSED(step);
 
     /* Return immediately */
     return;
