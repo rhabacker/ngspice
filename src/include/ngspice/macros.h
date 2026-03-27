@@ -20,6 +20,10 @@
 
 #define	NUMELEMS(ARRAY)	(sizeof(ARRAY)/sizeof(*ARRAY))
 
+#ifndef UNUSED
+#define UNUSED(x) (void)(x)
+#endif
+
 /* String macros */
 
 #define eq(a,b)  (!strcmp((a), (b)))
