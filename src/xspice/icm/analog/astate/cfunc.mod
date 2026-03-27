@@ -83,8 +83,6 @@ static void cm_astate_callback(ARGS, Mif_Callback_Reason_t reason);
 void cm_astate(ARGS)
 {
     int state_number = 0;
-    double outval = 0.0;
-
     stLocal_Data_t *loc;        /* Pointer to local static data, not to be included
                                        in the state vector */
 
