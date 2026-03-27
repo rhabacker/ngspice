@@ -68,7 +68,7 @@ static double **dmatrix(int nrow, int ncol)
 static void dmatrix_free(double **d, int nrow, int ncol)
 {
     int i;
-    (void) ncol;
+    UNUSED(ncol);
     if (d && nrow > 1) {
         for (i = 0; i < nrow; i++) {
             tfree(d[i]);

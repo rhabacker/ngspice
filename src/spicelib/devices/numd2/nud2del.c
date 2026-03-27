@@ -182,7 +182,7 @@ int NUMD2modDelete(GENmodel *gen_model)
             FREE(this);
         }
     }
-    (void)dopTables;
+    UNUSED(dopTables);
     {
         TWOmaterial *next = NULL, *this = NULL;
         next = matlInfo;
