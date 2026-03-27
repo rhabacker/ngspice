@@ -3225,8 +3225,7 @@ PRIVATE void print_report
 
 	    PRINTF(("%s: last seen in column:                             %d",
 	    method, INDEX (i1))) ;
-
-	    /* no break - fall through to next case instead */
+	    /* fall through */
 
 	case COLAMD_OK:
 
