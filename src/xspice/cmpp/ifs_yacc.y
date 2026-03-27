@@ -455,7 +455,7 @@ check_end_item_num (void)
 
 static void store_default_value(My_Value_t *vp)
 {
-    if (TBL->num_default_values >= alloced_size[TBL_DEFAULTS]) {
+    if (TBL->num_default_values >= (int)alloced_size[TBL_DEFAULTS]) {
         /* Expand table. */
 
         alloced_size [TBL_DEFAULTS] += GROW_SIZE * 5;
